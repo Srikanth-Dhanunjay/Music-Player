@@ -7,6 +7,12 @@ const PORT = process.env.PORT || 3000;
 // serve static files (HTML, CSS, JS, images, songs, etc.)
 app.use(express.static(path.join(__dirname)));
 
+
+app.use('/svgfolder', express.static(path.join(__dirname, 'svgfolder')));
+
+// For your nested songs folder (with album subfolders)
+app.use('/songs', express.static(path.join(__dirname, 'songs')));
+
 // default route (index.html)
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));

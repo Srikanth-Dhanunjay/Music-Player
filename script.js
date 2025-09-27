@@ -15,7 +15,7 @@ function formatTime(seconds) {
 
 // fetch songs from songs folder
 async function getSongs(folder) {
-  let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/`);
+  let a = await fetch(`/songs/${folder}/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -69,7 +69,7 @@ const playmusic = (track, element, currentfolder) => {
 
 //fetch different songs folders from songs directory as cards
 async function displayalbums() {
-  let a = await fetch(`http://127.0.0.1:3000/songs/`);
+  let a = await fetch(`/songs/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -79,7 +79,7 @@ async function displayalbums() {
     if (e.href.includes("songs")) {
       const dechref = decodeURI(e.href).replace(/\\/g, '/').replace(/\/+/g, "/");
       let folder = dechref.split("/").slice(-2)[0];
-      let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
+      let a = await fetch(`/songs/${folder}/info.json`)
       let response = await a.json();
       html += `
       <div class="card" data-folder="${folder}">
@@ -216,7 +216,7 @@ async function main() {
       img.src = img.src.replace("volume-max-svgrepo-com.svg", "volume-mute-svgrepo-com.svg");
     }
     else {
-      img.src = "http://127.0.0.1:3000/svgfolder/volume-max-svgrepo-com.svg";
+      img.src = "/svgfolder/volume-max-svgrepo-com.svg";
     }
   })
 

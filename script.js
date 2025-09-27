@@ -15,21 +15,15 @@ function formatTime(seconds) {
 
 // fetch songs from songs folder
 async function getSongs(folder) {
-  let a = await fetch(`/songs/${folder}/`);
-  let response = await a.text();
-  let div = document.createElement("div");
-  div.innerHTML = response;
-  let as = div.getElementsByTagName("a");
-  let songs = [];
-  for (let elem of as) {
-    if (elem.href.endsWith(".mp3")) {
-      let decodedhref = decodeURI(elem.href).replace(/\\/g, "/").replace(/\/+/g, "/");
-      songs.push(decodedhref.split(`/songs/${folder}/`)[1]);
-    }
-  }
-  console.log(songs);
-  return songs;
+  
+  // Fetch the album's info.json
+  const response = await fetch(`/songs/${folder}/info.json`);
+  const data = await response.json();
+
+  // Return the list of songs from JSON
+  return data.songs; 
 }
+
 
 //play music and pause music based on current state of track 
 const playmusic = (track, element, currentfolder) => {
@@ -69,13 +63,11 @@ const playmusic = (track, element, currentfolder) => {
 
 //fetch different songs folders from songs directory as cards
 async function displayalbums() {
-  let a = await fetch(`/songs/`);
-  let response = await a.text();
-  let div = document.createElement("div");
-  div.innerHTML = response;
-  let anchors = div.getElementsByTagName("a");
+  const res = await fetch("/songs/albums.json");
+  const data = await res.json();
+  const albums = data.albums;
   let html = '';
-  for (let e of anchors) {
+  for (let e of albums) {
     if (e.href.includes("songs")) {
       const dechref = decodeURI(e.href).replace(/\\/g, '/').replace(/\/+/g, "/");
       let folder = dechref.split("/").slice(-2)[0];

@@ -68,9 +68,7 @@ async function displayalbums() {
   const albums = data.albums;
   let html = '';
   for (let e of albums) {
-    if (e.href.includes("songs")) {
-      const dechref = decodeURI(e.href).replace(/\\/g, '/').replace(/\/+/g, "/");
-      let folder = dechref.split("/").slice(-2)[0];
+      let folder = e;
       let a = await fetch(`/songs/${folder}/info.json`)
       let response = await a.json();
       html += `
@@ -83,7 +81,6 @@ async function displayalbums() {
                     <p>${response.Description}</p>
                 </div>
       `;
-    }
   }
   document.querySelector(".card-container").innerHTML = html;
 }

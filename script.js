@@ -17,7 +17,7 @@ function formatTime(seconds) {
 async function getSongs(folder) {
   
   // Fetch the album's info.json
-  const response = await fetch(`/songs/${folder}/info.json`);
+  const response = await fetch(`songs/${folder}/info.json`);
   const data = await response.json();
 
   // Return the list of songs from JSON
@@ -45,7 +45,7 @@ const playmusic = (track, element, currentfolder) => {
     }
   }
   else {
-    currentsong.src = `/songs/${currentfolder}/${track}`;
+    currentsong.src = `songs/${currentfolder}/${track}`;
     const circle = document.querySelector(".circle");
     circle.style.transition = `none`;
     circle.style.left = `0%`;
@@ -63,20 +63,20 @@ const playmusic = (track, element, currentfolder) => {
 
 //fetch different songs folders from songs directory as cards
 async function displayalbums() {
-  const res = await fetch("/songs/albums.json");
+  const res = await fetch("songs/albums.json");
   const data = await res.json();
   const albums = data.albums;
   let html = '';
   for (let e of albums) {
       let folder = e;
-      let a = await fetch(`/songs/${folder}/info.json`)
+      let a = await fetch(`songs/${folder}/info.json`)
       let response = await a.json();
       html += `
       <div class="card" data-folder="${folder}">
                     <div class="play">
                         <img src="svgfolder/play.svg" alt="playbutton" >
                     </div>
-                    <img src="/songs/${folder}/cover.jpg" alt="cover image" class="rounded" >
+                    <img src="songs/${folder}/cover.jpg" alt="cover image" class="rounded" >
                     <h2>${response.title}</h2>
                     <p>${response.Description}</p>
                 </div>

@@ -30,18 +30,18 @@ const playmusic = (track, element, currentfolder) => {
   const liplay = element.querySelector(".playnow img");
   const mainPlay = document.getElementById("play");
   document.querySelectorAll(".songList li").forEach(e => {
-    e.querySelector(".playnow img").src = "svgfolder/playerplay.svg";
+    e.querySelector(".playnow img").src = "./svgfolder/playerplay.svg";
   });
   if (currentsong.src.endsWith(track)) {
     if (currentsong.paused) {
       currentsong.play();
-      liplay.src = "svgfolder/pause.svg";
-      mainPlay.src = "svgfolder/pause.svg";
+      liplay.src = "./svgfolder/pause.svg";
+      mainPlay.src = "./svgfolder/pause.svg";
     }
     else {
       currentsong.pause();
-      liplay.src = "svgfolder/playerplay.svg";
-      mainPlay.src = "svgfolder/playerplay.svg";
+      liplay.src = "./svgfolder/playerplay.svg";
+      mainPlay.src = "./svgfolder/playerplay.svg";
     }
   }
   else {
@@ -52,8 +52,8 @@ const playmusic = (track, element, currentfolder) => {
     circle.offsetHeight;
     circle.style.transition = "left 0.5s ease-in-out"
     currentsong.play();
-    liplay.src = "svgfolder/pause.svg";
-    mainPlay.src = "svgfolder/pause.svg";
+    liplay.src = "./svgfolder/pause.svg";
+    mainPlay.src = "./svgfolder/pause.svg";
     document.querySelector(".circle").style.left = `0%`;
   }
   let songname = element.querySelector(".info").firstElementChild.innerText.trim().split(".mp3")[0];
@@ -74,7 +74,7 @@ async function displayalbums() {
       html += `
       <div class="card" data-folder="${folder}">
                     <div class="play">
-                        <img src="svgfolder/play.svg" alt="playbutton" >
+                        <img src="./svgfolder/play.svg" alt="playbutton" >
                     </div>
                     <img src="songs/${folder}/cover.jpg" alt="cover image" class="rounded" >
                     <h2>${response.title}</h2>
@@ -97,12 +97,12 @@ async function main() {
       songul.innerHTML = ``;
       for (let song of songs) {
         songul.innerHTML += `<li>
-                <img src="svgfolder/music.svg" alt="music" />
+                <img src="./svgfolder/music.svg" alt="music" />
                 <div class="info">
                   <div class="nowrap">${song}</div>
                 </div>
                 <div class="playnow">
-                  <img src="svgfolder/playerplay.svg" alt="play now">
+                  <img src="./svgfolder/playerplay.svg" alt="play now">
                 </div></li>`;
       }
       Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
@@ -118,24 +118,24 @@ async function main() {
     if (!currentsong.src) return;
     if (currentsong.paused) {
       currentsong.play();
-      play.src = "svgfolder/pause.svg";
+      play.src = "./svgfolder/pause.svg";
       document.querySelectorAll(".songList li").forEach(e => {
         let songname = e.querySelector(".info").firstElementChild.innerText.trim();
         let icon = e.querySelector(".playnow img");
         if (currentsong.src.endsWith(songname)) {
-          icon.src = "svgfolder/pause.svg";
+          icon.src = "./svgfolder/pause.svg";
         }
-        else icon.src = "svgfolder/playerplay.svg";
+        else icon.src = "./svgfolder/playerplay.svg";
       });
     }
     else {
       currentsong.pause();
-      play.src = "svgfolder/playerplay.svg";
+      play.src = "./svgfolder/playerplay.svg";
       document.querySelectorAll(".songList li").forEach(e => {
         let songname = e.querySelector(".info").firstElementChild.innerText.trim();
         let icon = e.querySelector(".playnow img");
         if (currentsong.src.endsWith(songname)) {
-          icon.src = "svgfolder/playerplay.svg";
+          icon.src = "./svgfolder/playerplay.svg";
         }
       });
     }
@@ -150,10 +150,10 @@ async function main() {
 
   //icons reset when song ends
   currentsong.addEventListener("ended", () => {
-    play.src = "svgfolder/playerplay.svg";
+    play.src = "./svgfolder/playerplay.svg";
     document.querySelectorAll(".songList li").forEach(e => {
       let icon = e.querySelector(".playnow img");
-      icon.src = "svgfolder/playerplay.svg";
+      icon.src = "./svgfolder/playerplay.svg";
     });
   });
 
@@ -205,7 +205,7 @@ async function main() {
       img.src = img.src.replace("volume-max-svgrepo-com.svg", "volume-mute-svgrepo-com.svg");
     }
     else {
-      img.src = "svgfolder/volume-max-svgrepo-com.svg";
+      img.src = "./svgfolder/volume-max-svgrepo-com.svg";
     }
   })
 
